@@ -117,6 +117,14 @@ INTERESTING DIRECTORY
 http://172.16.64.140/project/backup/test/sdadas.txt
 Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 /var/www/html/project/354253425234234/flag.txt
+![mysqlcreds](https://user-images.githubusercontent.com/76081641/130326946-f9519d7e-60da-4d55-a8a1-499906bcd998.png)
+
+
+Using metasploit console to enumerate logins for the remote host.
+
+`msf6> use auxiliary/scanner/mssql/mssql_login`
+![auxiliary](https://user-images.githubusercontent.com/76081641/130326924-ed89e4fc-9e8b-411b-b087-62ef2c01bdd8.png)
+
 
 - Next target `172.16.64.182`
 
