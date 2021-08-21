@@ -1,0 +1,6 @@
+A Pen test report must include 
+-Techniques used
+- Vulnerabilities found
+-Exploits used
+-Impact and risk analysis for each vulnerability
+-Remediation tips ***VIP***

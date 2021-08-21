@@ -1,0 +1,30 @@
+#Burp Suite Lab #2
+#Goal
+
+#The goal of this lab is to test the given web application 
+#in order to find a hidden path that contains a restricted area.
+#Once the hidden path is discovered, your goal will be to bypass 
+#the authentication exploiting a "feature" left over by the developers 
+#while "debugging" the area.
+
+Target Web App: 10.100.13.5
+Tools: Web Browser and Burp Suite 
+
+#In burp: Proxy>Options>Set interface port # to 8081. 
+#Target Scope: Add > 10.100.13.5
+
+#On the website. need to automate a way to find the hidden directory.
+#Directory traversal to the robots.txt file.
+User-agent: *
+Disallow: /Y7gMEMZtin/
+
+<!-- 
+************************************************************************************
+	ALERT: Remove this in production!!	
+************************************************************************************
+
+DEBUGGIN MODE 
+To avoid the authentication page, send in the query string DEBUG=policeDebug 
+
+e.g. login.php?DEBUG=policeDebug
+-->
