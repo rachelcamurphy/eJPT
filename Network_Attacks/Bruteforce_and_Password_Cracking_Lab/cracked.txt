@@ -1,0 +1,2 @@
+Loaded 99 password hashes with 99 different salts (sha512crypt, crypt(3) $6$ [SHA512 256/256 AVX2 4x])
+No password hashes left to crack (see FAQ)

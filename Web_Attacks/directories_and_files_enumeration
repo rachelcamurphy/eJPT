@@ -1,0 +1,44 @@
+#Directories and Files Enumeration
+#Able to
+- Find and exploit testing features
+- Exploit info saved in backup or old files
+- Find hidden resources
+#Common backup file names: .bak, .old, .txt, and .xxx
+#Enumerate Web Resources with Dirbuster (GUI)+ Java App
+#Dirb is Linux alternative (Command line tool)
+#Dirbuster Config
+Number of Threads > Go Faster 
+List based
+/usr/shar/dirbuster/wordlists/directory-list-lowercase-2.3-small.txt
+File extension: bak,old
+URL to fuzz can be set instead of root folder.
+/users.bak
+(right click>view response)
+(got list of users)
+/include/config.old
+(got info about database connection)
+can save report in different formats.
+#Dirb
+takes wordlists and requests them from target 
+web app & returns HTTP response code.
+
+cd /usr/share/dirb/wordlists
+
+`dirb http://google.com /usr/share/dirb/worlists/small.txt`
+
+Custom wordlists avails on github
+
+dirb -a (user agent string) http://useragentstring.com/pages/useragentstring.php
+ex:
+`dirb http://google.com -a "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko/20090327 Galeon/2.0.7"
+
+dirb -p to specify a proxy.
+ex:
+`dirb http:// 192.168.0.33 -p http://127.0.0.1:8080 -c "COOKIE:XYZ"`
+(integration with burp.)
+
+dirb <target site> -p http://127.0.0.1:8080 -u "admin:password"
+#can use burp decoder to decode the passed traffic)
+dirb <target site> -p http://127.0.0.1:8080 -H "MyHeader:My Content"
+#slow down requests with -z flag for firewall evasion
+dirb <target site> -z 1000 (1 request / sec)

