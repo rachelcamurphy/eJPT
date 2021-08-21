@@ -1,24 +1,24 @@
-#Rachel Murphy
-#INE-8/20/21
-#Black Box Pen Test 1
+# Rachel Murphy
+# INE-8/20/21
+# Black Box Pen Test 1
 
-#Scenario
+# Scenario
 - You have been engaged in a Black-box Penetration Test (172.16.64.0/24 range). Your goal is to read the flag file on each machine. On some of them, you will be required to exploit a remote code execution vulnerability in order to read the flag.
 - Some machines are exploitable instantly but some might require exploiting other ones first. Enumerate every compromised machine to identify valuable information, that will help you proceed further into the environment.
 - If you are stuck on one of the machines, don't overthink and start pentesting another one.
 - When you read the flag file, you can be sure that the machine was successfully compromised. But keep your eyes open - apart from the flag, other useful information may be present on the system.
 
-#Goals
+# Goals
 - Discover and exploit all the machines on the network
 - Read all flag files (one per machine)
 
-#What you will learn
+# What you will learn
 - How to exploit Apache Tomcat
 - How to exploit SQL server
 - Post Exploitation Discovery
 - Arbitrary file upload exploitation
 
-#Recommended Tools
+# Recommended Tools
 - Dirb
 - Metasploit framework
 - Nmap 
@@ -105,3 +105,21 @@ Remote connection made and locate the flag.txt files with `locate flag.txt`
 
 - Next target http://172.16.64.140:80
 - Apache httpd 2.4.18
+Enumerating directories with dirb.
+`dirb http://172.16.64.140:80 /usr/share/wordlists/dirb/common.txt`
+Navigated to the /project directory
+Entered credentials: admin:admin
+and.....accessed web browser. potential SQLi
+Enumerate harder.
+dirb http://172.16.64.140/project -u admin:admin 
+
+INTERESTING DIRECTORY
+http://172.16.64.140/project/backup/test/sdadas.txt
+Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
+/var/www/html/project/354253425234234/flag.txt
+
+- Next target `172.16.64.182`
+
+
+- Next target `172.16.64.199`
+
