@@ -109,11 +109,16 @@ Enumerating directories with dirb.
 `dirb http://172.16.64.140:80 /usr/share/wordlists/dirb/common.txt`
 Navigated to the /project directory
 Entered credentials: admin:admin
-and.....accessed web browser. potential SQLi
+and.....accessed web browser.
+
+![project](https://user-images.githubusercontent.com/76081641/130362887-cbf7e30f-e553-4e92-8348-a3ebfa057e4c.png)
+
 Enumerate harder.
+
 dirb http://172.16.64.140/project -u admin:admin 
 
 INTERESTING DIRECTORY
+
 http://172.16.64.140/project/backup/test/sdadas.txt
 
 Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
@@ -125,6 +130,8 @@ Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 Perform a simple directory traversal to read the flag.txt file. 
 
 http://172.16.64.140/project/354253425234234/flag.txt
+
+![flag](https://user-images.githubusercontent.com/76081641/130362852-522c7135-a21b-4a26-947c-94ebb2d228f5.png)
 
 
 - Next target `172.16.64.182`
