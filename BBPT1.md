@@ -115,13 +115,17 @@ dirb http://172.16.64.140/project -u admin:admin
 
 INTERESTING DIRECTORY
 http://172.16.64.140/project/backup/test/sdadas.txt
+
 Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 /var/www/html/project/354253425234234/flag.txt
+
 ![mysqlcreds](https://user-images.githubusercontent.com/76081641/130326946-f9519d7e-60da-4d55-a8a1-499906bcd998.png)
+
 
 Perform a simple directory traversal to read the flag.txt file. 
 
 http://172.16.64.140/project/354253425234234/flag.txt
+
 
 - Next target `172.16.64.182`
 
