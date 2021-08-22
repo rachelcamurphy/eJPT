@@ -119,15 +119,32 @@ Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 /var/www/html/project/354253425234234/flag.txt
 ![mysqlcreds](https://user-images.githubusercontent.com/76081641/130326946-f9519d7e-60da-4d55-a8a1-499906bcd998.png)
 
+Perform a simple directory traversal to read the flag.txt file. 
 
-Using metasploit console to enumerate logins for the remote host.
-
-`msf6> use auxiliary/scanner/mssql/mssql_login`
-![auxiliary](https://user-images.githubusercontent.com/76081641/130326924-ed89e4fc-9e8b-411b-b087-62ef2c01bdd8.png)
-
+http://172.16.64.140/project/354253425234234/flag.txt
 
 - Next target `172.16.64.182`
 
+Recalling the nmap scan 
+
+```
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+MAC Address: 00:50:56:A2:B1:61 (VMware)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+```
 
 - Next target `172.16.64.199`
 
+Recalling the nmap scan 
+
+```
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds?
+1433/tcp open  ms-sql-s      Microsoft SQL Server 2014 12.00.2000
+MAC Address: 00:50:56:A2:BF:51 (VMware)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+```
+Most likely a null session or mssql vulnerability.
