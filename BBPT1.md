@@ -134,7 +134,7 @@ http://172.16.64.140/project/354253425234234/flag.txt
 ![flag](https://user-images.githubusercontent.com/76081641/130362852-522c7135-a21b-4a26-947c-94ebb2d228f5.png)
 
 
-- Next target `172.16.64.182`
+- Next target `172.16.64.182` - This ended up being the last machine because the ssh user credentials were stored in the windows machine. 
 
 Recalling the nmap scan 
 
