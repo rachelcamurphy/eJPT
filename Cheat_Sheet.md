@@ -14,6 +14,12 @@
 ```dirb http://targetip```
 
 - Remember to view page source as well!!
+# Web App Attacks
+
+## XSS Examples
+
+- Test for XSS 
+`<script>alert(1)</script>` (Returns pop up window) 
 
 # Prep for Reverse Shell 
 
