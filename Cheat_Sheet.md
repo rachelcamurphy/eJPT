@@ -34,6 +34,15 @@
 
 # After obtaining reverse shell in meterpreter
 
-- Friendlier terminal prompt withing meterpreter
+- Friendlier terminal prompt within meterpreter
 `shell`
 `bash -i`
+
+- Spawn terminal 
+
+`python -c 'import pty;pty.spawn("/bin/bash")';`
+
+# Post Exploitation Checks 
+
+- Always check /etc/hosts file 
+- Check /var/www for flag
