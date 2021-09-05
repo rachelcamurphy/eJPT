@@ -1,8 +1,8 @@
-#XSS Lab 
-#INE
-#RCM 8/14/21
+# XSS Lab 
+# INE
+# RCM 8/14/21
 
-#Description
+# Description
 n this lab you can practice XSS attacks against a web application hosted at the address 192.168.99.10. Since the application allows registered users to add comments, we have already created an account on the application. The credentials of this account are:
 
     Username: attacker
@@ -11,13 +11,13 @@ n this lab you can practice XSS attacks against a web application hosted at the 
 
 Moreover, we created another web page in the lab for your convenience. You can use it to receive stolen cookies! You can find it at http://192.168.99.11/get.php : it takes all parameters passed via GET and stores them into the jar.txt file.
 
-#Goal
+# Goal
 The administrator visits the application every few minutes. The final goal of the lab is to steal the administrator cookies via XSS. Once you have these cookies you should be able to access the content of the page admin.php.
 
-#Tools
+# Tools
 Brain
 
-#Steps
+# Steps
 
 1. Find all XSS injection points in the web app.
 - Log in with credentials attacker:attacker
